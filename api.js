@@ -9,6 +9,9 @@ app.controller('customersCtrl', function ($scope, $http, $timeout) {
     $scope.email = "";
     $scope.timestamp = "";
 
+    $scope.success = false;
+    $scope.failure = false;
+
     var pageSize = 10;
 
     $scope.orderBy = "id desc";
@@ -19,10 +22,14 @@ app.controller('customersCtrl', function ($scope, $http, $timeout) {
 
     $scope.displayOptions = false;
 
-    $scope.baseURL = "http://snig.gr/";
+    $scope.baseURL = "http://snig.gr/api/";
 
 
     $scope.searchProps = function () {
+        $timeout(function () {
+            $scope.success = false;
+            $scope.failure = false;
+        }, 600)
         var searchURL = $scope.baseURL + "list.aspx?page=" + $scope.page + "&limit=" + pageSize + "&orderby=" + $scope.orderBy;
         $http.get(searchURL)
     .then(function (response) { $scope.pages = Math.ceil(response.data.recordcount / pageSize); $scope.users = response.data.records; if ($scope.page == 1) { $scope.btnP = true; $scope.prevTxt = ""; } else { $scope.btnP = false; $scope.prevTxt = "<< Previous"; } if ($scope.page >= $scope.pages) { $scope.btnN = true; $scope.nextTxt = ""; } else { $scope.btnN = false; $scope.nextTxt = "Next >>"; } if (response.data.records.length == 0) { $scope.prevPage() } })
@@ -46,6 +53,8 @@ app.controller('customersCtrl', function ($scope, $http, $timeout) {
 
     $scope.searchProps();
 
+    
+
     $scope.toggleSearch = function () {
         if ($scope.searchOptions == false) {
             $scope.hide();
@@ -58,9 +67,9 @@ app.controller('customersCtrl', function ($scope, $http, $timeout) {
     }
 
     $scope.delete = function (id) {
-        var delURL = $scope.baseURL + "delete.aspx?id=" + id;
-        $http.get(delURL)
-    .then(function (response) { alert(response.data.result); $scope.searchProps(); })
+    var delURL = $scope.baseURL + "delete.aspx?id=" + id;
+    $http.get(delURL)
+    .then(function (response) { if (response.data.result == "false") { $scope.failure = true; } else { $scope.success = true; } $scope.searchProps(); })
     };
 
     $scope.display = function (id) {
@@ -94,7 +103,7 @@ app.controller('customersCtrl', function ($scope, $http, $timeout) {
             }
         }
         $http.post(updURL, data, config)
-    .then(function (response) { if (response.data.result == "error") { alert(response.data.result + " - " + response.data.reason); } $scope.hide(); $scope.searchProps(); })
+    .then(function (response) { if (response.data.result == "error") { $scope.failure = true; alert(response.data.result + " - " + response.data.reason); } else { $scope.success = true; } $scope.hide(); $scope.searchProps(); })
 
     };
 

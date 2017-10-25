@@ -39,8 +39,14 @@ margin-left:-250px;
 border:4px solid #fff;
 
 }
+.success{width:100%;height:100%;position:fixed;z-index:1001;opacity:0.8;background-color:lightgreen;top:0;left:0;transition: all opacity .6s;
+  -webkit-transition: all opacity .6s;}
+.failure{width:100%;height:100%;position:fixed;z-index:1001;opacity:0.8;background-color:lightcoral;top:0;left:0;transition: all opacity .6s;
+  -webkit-transition: all opacity .6s;}
 .ng-hide {
     height: 0;
+    opacity:0;
+
 }
 #results{
 width: 100%;
@@ -74,4 +80,6 @@ background-color:lightcoral;
 .ng-untouched {
 background-color:white;
  }
+tr:hover{background-color:#eee;}
+
       
