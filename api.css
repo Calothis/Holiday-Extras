@@ -1,0 +1,77 @@
+body{
+font-family:arial
+}
+.searchOver{
+background-color:#ddd;
+padding:3px;
+border-radius:3px;
+}
+.heading{
+background-color:#ffbbbb;
+padding:3px;
+border-radius:3px;
+}
+.searchDiv{
+background-color:#eeeeee;
+transition: all linear 0.25s;
+height:100px;
+border-radius: 5px;
+padding: 5px; 
+padding-top:20px;
+width: 100%;
+margin-top:10px;
+overflow:hidden;
+
+}
+.userDetails {
+background-color:#eeeeee;
+transition: all linear 0.25s;
+height:130px;
+border-radius: 15px;
+left:50%;
+top:50px;
+padding: 20px; 
+width: 500px;
+position:fixed;
+z-index:1000;
+overflow:hidden;
+margin-left:-250px;
+border:4px solid #fff;
+
+}
+.ng-hide {
+    height: 0;
+}
+#results{
+width: 100%;
+}
+.prev{
+width:15%;
+height:20px;
+float:left;
+}
+.pages{
+text-align:center;
+width:70%;
+height:20px;
+float:left;
+}
+.next{
+width:15%;
+height:20px;
+text-align:right;
+float:left;
+}
+hr{
+clear:left;
+}
+input.ng-valid-required {
+background-color:lightgreen;
+}
+input.ng-invalid-email {
+background-color:lightcoral;
+}
+.ng-untouched {
+background-color:white;
+ }
+      
